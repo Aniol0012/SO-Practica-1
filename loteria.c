@@ -23,10 +23,10 @@ void ctrl4 ();
 // Declarem unes variables globals per a poder-les utilitzar en totes les funcions
 
 char outputmsg [150]; // Llargada màxima de caràcters dels strings per a imprimir per pantalla
-int pid[150];
-int p1[N][2];
-int p2[N][2];
-int llavor;
+int pid[150]; // Array dels pid dels N fills
+int p1[N][2]; // Creem un array bidimensional pel pipe 1 de N fills i 2 posicions, una per escriptura i una altra per lecutra
+int p2[N][2]; // Creem un array bidimensional pel pipe 2 de N fills i 2 posicions, una per escriptura i una altra per lecutra
+int llavor;  // Definim una variable llavor per a usar-la per la generació dels nombres aleatoris amb el srand() d'un parametre passat per parametre en l'execució
 
 int main(int n_args, char *param_llavor[]) {
 
@@ -79,7 +79,7 @@ int main(int n_args, char *param_llavor[]) {
         pause();
     }
 
-    // Agafem el paràmetre que li passem al main() en l'execució i el transformem a enter (ja que ha d'entrar com a *char) per a usar-lo pel tractament de nombres aleatoris
+    // Agafem el paràmetre que li passem al main() en l'execució i el transformem a enter (ja que ha d'entrar com a char) per a usar-lo pel tractament de nombres aleatoris
 
     llavor = atoi(param_llavor[1]);
     srand(llavor); // Inicialitzem la llavor per a utilitzar el rand()
@@ -93,27 +93,26 @@ void ctrlc () { // Tractament del senyal del Pare per a Ctrl + C
 	}
 	
 	sprintf(outputmsg,"Pare > Adeu\n"); 
-	write(1,outputmsg,strlen(outputmsg));
+	write(1,outputmsg, strlen(outputmsg));
 	exit(0);
 }
 
 void ctrl4 () { // Tractament del senyal del Pare per a Ctrl + 4
         
-	int inici_llavors [N];
-    int param_llegit [N];
+	int array_aleatoris [N]; // Array de nombres aleatoris
+    int num_llegit [N];
     
-	sprintf(outputmsg,"Pare > Numero premiat: ");
+	sprintf(outputmsg,"Pare > Número premiat: ");
 	write(1,outputmsg,strlen(outputmsg));
 
-	for (int i = 0; i < N; i++) {
-		inici_llavors[i] = rand(); // Nombres aleatoris a enviar
-	    write(p1[i][1], &inici_llavors[i], sizeof(int));
-	    read(p2[i][0], &param_llegit[i], sizeof(int));
-        sprintf(outputmsg,"%i", param_llegit[i]);
+    for (int i = 0; i < N; i++) {
+		array_aleatoris[i] = rand(); // Creem un nombre aleatori per a cada posicio del array
+	    write(p1[i][1], &array_aleatoris[i], sizeof(int)); // Escrivim al pipe 1 el nombre aleatori en la posició i del array
+	    read(p2[i][0], &num_llegit[i], sizeof(int)); // Llegim del pipe 2 a la posició i del array
+        sprintf(outputmsg,"%i", num_llegit[i]);
         write(1,outputmsg,strlen(outputmsg));
-    }	
-
-	write(1,"\n", sizeof(char));
-	
+    }
+    
+	write(1,"\n", sizeof(char)); // Fem un salt de linea per a cada senyal enviada
 }
 
