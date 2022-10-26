@@ -35,6 +35,12 @@ int main(int n_args, char *param_llavor[]) {
     sprintf(outputmsg, "Pressiona Ctrl + 4 per a començar el programa i Ctrl + C per acabar-lo: \n");
 
     write(1, outputmsg, strlen(outputmsg));
+    
+    /* Agafem el paràmetre que li passem al main() en l'execució abans del fork() (per a que es comparteixin les variables) 
+    i el transformem a enter (ja que ha d'entrar com a char) per a usar-lo pel tractament de nombres aleatoris */
+    
+    llavor = atoi(param_llavor[1]);
+    srand(llavor); // Inicialitzem la llavor per a utilitzar el rand()
 
     // Creem un bucle per a crear els N fills
 
@@ -78,11 +84,6 @@ int main(int n_args, char *param_llavor[]) {
 		// Durant l'execució mentre que el programa hagi enviat cap senyal, el programa roman a l'espera d'una d'elles
         pause();
     }
-
-    // Agafem el paràmetre que li passem al main() en l'execució i el transformem a enter (ja que ha d'entrar com a char) per a usar-lo pel tractament de nombres aleatoris
-
-    llavor = atoi(param_llavor[1]);
-    srand(llavor); // Inicialitzem la llavor per a utilitzar el rand()
 }
 
 void ctrlc () { // Tractament del senyal del Pare per a Ctrl + C
@@ -115,4 +116,3 @@ void ctrl4 () { // Tractament del senyal del Pare per a Ctrl + 4
     
 	write(1,"\n", sizeof(char)); // Fem un salt de linea per a cada senyal enviada
 }
-
