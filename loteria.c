@@ -23,7 +23,7 @@ void ctrl4 ();
 // Declarem unes variables globals per a poder-les utilitzar en totes les funcions
 
 char outputmsg [150]; // Llargada màxima de caràcters dels strings per a imprimir per pantalla
-int pid[150]; // Array dels pid dels N fills
+int pid[50]; // Array dels pid dels N fills
 int p1[N][2]; // Creem un array bidimensional pel pipe 1 de N fills i 2 posicions, una per escriptura i una altra per lecutra
 int p2[N][2]; // Creem un array bidimensional pel pipe 2 de N fills i 2 posicions, una per escriptura i una altra per lecutra
 int llavor;  // Definim una variable llavor per a usar-la per la generació dels nombres aleatoris amb el srand() d'un parametre passat per parametre en l'execució
@@ -38,7 +38,7 @@ int main(int n_args, char *param_llavor[]) {
 
     // Creem un bucle per a crear els N fills
 
-    for (int i; i < N; i++) {
+    for (int i=0; i < N; i++) {
         // Creem els dos pipes, en total en crearem 2N
         pipe(p1[i]);
         pipe(p2[i]);
@@ -56,7 +56,7 @@ int main(int n_args, char *param_llavor[]) {
                 close(p1[i][0]); // Tanquem totes les entrades i sortides dels pipes
                 close(p1[i][1]);
                 close(p2[i][0]);
-                close(p1[i][1]);
+                close(p2[i][1]);
 
                 execl("./loteria_2", "loteria_2", NULL); // Fem el recobriment i executem l'executable de loteria_2.c, és a dir, executem loteria_2
                 perror("No s'ha pogut fer el recobriment de loteria_2\n");
@@ -67,12 +67,12 @@ int main(int n_args, char *param_llavor[]) {
     // Un cop creats els fills creem un bucle infinit per tal d'estar esperant que es pressioni Ctrl + 4 o Ctrl + C
 
     while (1) {
+    	if (signal(SIGINT, ctrlc) == SIG_ERR) { // Ctrl + C
+            perror("No s'ha pogut enviar el senyal SIGINT\n");
+        }
+        
         if (signal(SIGQUIT, ctrl4) == SIG_ERR){ // Ctrl + 4
             perror("No s'ha pogut enviar el senyal SIGQUIT\n");
-        }
-
-        if (signal(SIGINT, ctrlc) == SIG_ERR) { // Ctrl + C
-            perror("No s'ha pogut enviar el senyal SIGINT\n");
         }
 
 		// Durant l'execució mentre que el programa hagi enviat cap senyal, el programa roman a l'espera d'una d'elles
@@ -87,7 +87,7 @@ int main(int n_args, char *param_llavor[]) {
 
 void ctrlc () { // Tractament del senyal del Pare per a Ctrl + C
 	
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) {		
 		kill(pid[i],SIGTERM); // Enviem un senyal per a acabar l'execució per a cada fill
 		wait(NULL); // Esperem als N fills
 	}
