@@ -15,22 +15,18 @@
 
 #define N 5 // Número de fills (pot ser modificat, i alterarà el nombre de xifres)
 
-// Inicialitzem les funcions auxiliars
-
 void ctrlc ();
 void ctrl4 ();
 
 // Declarem unes variables globals per a poder-les utilitzar en totes les funcions
 
-char outputmsg [150]; // Llargada màxima de caràcters dels strings per a imprimir per pantalla
+char outputmsg [150];
 int pid[50]; // Array dels pid dels N fills
 int p1[N][2]; // Creem un array bidimensional pel pipe 1 de N fills i 2 posicions, una per escriptura i una altra per lecutra
 int p2[N][2]; // Creem un array bidimensional pel pipe 2 de N fills i 2 posicions, una per escriptura i una altra per lecutra
-int llavor;  // Definim una variable llavor per a usar-la per la generació dels nombres aleatoris amb el srand() d'un parametre passat per parametre en l'execució
+int llavor;
 
 int main(int n_args, char *param_llavor[]) {
-
-    // Missatge inicial per a mostrar les instruccions
 
     sprintf(outputmsg, "Pressiona Ctrl + 4 per a començar el programa i Ctrl + C per acabar-lo: \n");
 
@@ -50,9 +46,9 @@ int main(int n_args, char *param_llavor[]) {
         pipe(p2[i]);
 
         switch (pid[i] = fork()) {
-            case -1: // En cas d'error es printa un missatge d'error
+            case -1:
                 perror("Ha sorgit un error en crear el fill\n");
-                exit(-1); // Retorna error si no s'ha pogut crear el procés fill
+                exit(-1);
             
             case 0: // En cas que el procés fill és creo correctament
                 close(0); // Tanquem l'entrada estàndard per teclat
@@ -114,5 +110,5 @@ void ctrl4 () { // Tractament del senyal del Pare per a Ctrl + 4
         write(1,outputmsg,strlen(outputmsg));
     }
     
-	write(1,"\n", sizeof(char)); // Fem un salt de linea per a cada senyal enviada
+	write(1,"\n", sizeof(char));
 }
