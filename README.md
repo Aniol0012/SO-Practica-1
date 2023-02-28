@@ -8,7 +8,7 @@ Autors:
 * **Aniol Serrano Ortega**
 
 ### Per a compilar el programa:
-  - [ ]```sh
+  ```sh
   gcc -Wall loteria_2.c -o loteria_2
   ```
   
