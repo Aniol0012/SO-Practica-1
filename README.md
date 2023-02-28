@@ -8,11 +8,20 @@ Autors:
 · **Aniol Serrano Ortega**
 
 ### Per a compilar el programa:
-  1. ```sh gcc -Wall loteria_2.c -o loteria_2```
-  2. ```sh gcc -Wall loteria.c -o loteria```
+  1. ```sh
+  gcc -Wall loteria_2.c -o loteria_2
+  ```
+  3. 
+  ```sh
+  gcc -Wall loteria.c -o loteria
+  ```
  
 ### Per a executar el programa:
-  ```sh./loteria <numero_enter_aleatori>```
+  ```sh
+  ./loteria <numero_enter_aleatori>
+  ```
  
 ### Exemple:
-  ```sh./loteria 123456789```
+  ```sh
+  ./loteria 123456789
+  ```
