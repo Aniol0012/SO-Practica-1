@@ -1,16 +1,18 @@
 # SO-Practica-1
-Practica 1 - Sistemes Operatius 2n
+Practica 1 - Sistemes Operatius
+2n de Enginyeria Informàtica UDL
 
+### Septembre de 2022 - Gener de 2023
 Autors:
-Aleix Segura Paz i
-Aniol Serrano Ortega
+· **Aleix Segura Paz**
+· **Aniol Serrano Ortega**
 
-- Per a compilar el programa:
-  1. gcc -Wall loteria_2.c -o loteria_2
-  2. gcc -Wall loteria.c -o loteria
+### Per a compilar el programa:
+  1. ```sh gcc -Wall loteria_2.c -o loteria_2```
+  2. ```sh gcc -Wall loteria.c -o loteria```
  
-- Per a executar el programa:
-  1. ./loteria <numero_enter_aleatori>
+### Per a executar el programa:
+  ```sh./loteria <numero_enter_aleatori>```
  
- - Exemple:
-  ./loteria 123456789
+### Exemple:
+  ```sh./loteria 123456789```
