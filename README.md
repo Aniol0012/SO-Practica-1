@@ -1,9 +1,9 @@
-# SO-Practica-1
+<em> # SO-Practica-1 </em>
 ## Practica 1 - Sistemes Operatius
+> Octubre 2022
 2n de Enginyeria Informàtica UDL
 
-### Septembre de 2022 - Gener de 2023
-Autors:
+### Autors:
 * **Aleix Segura Paz**
 * **Aniol Serrano Ortega**
 
