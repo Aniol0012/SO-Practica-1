@@ -4,8 +4,8 @@ Practica 1 - Sistemes Operatius -
 
 ### Septembre de 2022 - Gener de 2023
 Autors:
-· **Aleix Segura Paz**
-· **Aniol Serrano Ortega**
+> **Aleix Segura Paz**
+> **Aniol Serrano Ortega**
 
 ### Per a compilar el programa:
   ```sh
