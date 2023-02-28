@@ -8,10 +8,10 @@ Autors:
 · **Aniol Serrano Ortega**
 
 ### Per a compilar el programa:
-  1. ```sh
+  ```sh
   gcc -Wall loteria_2.c -o loteria_2
   ```
-  3. 
+  
   ```sh
   gcc -Wall loteria.c -o loteria
   ```
