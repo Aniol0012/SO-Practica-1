@@ -1,5 +1,5 @@
 # SO-Practica-1
-Practica 1 - Sistemes Operatius
+Practica 1 - Sistemes Operatius -
 2n de Enginyeria Informàtica UDL
 
 ### Septembre de 2022 - Gener de 2023
